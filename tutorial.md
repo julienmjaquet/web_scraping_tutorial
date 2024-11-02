@@ -85,7 +85,11 @@ head(links)
 [3] "https://de.wikipedia.org/wiki/Aarberg"   "https://de.wikipedia.org/wiki/Aarburg"  
 [5] "https://de.wikipedia.org/wiki/Aarwangen" "https://de.wikipedia.org/wiki/Abtwil_AG"
 ```
-
+Now, we can add it to our table.
+```
+swissdata$links <- links
+View(swissdata)
+```
 
 ## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
 
