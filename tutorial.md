@@ -47,8 +47,9 @@ We can remove it and transform the variable into a numeric one.
 swissdata$Einwohner <- str_replace(swissdata$Einwohner,"'","")
 swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 ```
-<br/>
+
 ## Step 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
+
 The links are part of the html page we already retrieved (object "webage"). We are going to extract all links (in html code: "href") contained in the table only.
 
 ```
@@ -75,7 +76,7 @@ head(links)
 
 
 
-**Step 3 : loop over all municipalities web pages to retrieve additional information** <br/>
+## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
 
 
 
