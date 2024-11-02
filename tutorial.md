@@ -23,7 +23,15 @@ link <- "https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden"
 webpage <- read_html(link)
 ``` 
 
-
+Extract the table (by specifying the character used as a decimal place marker).
+``` 
+table <- webpage %>%
+  html_table(dec=",")
+```
+The newly created object `table' is a list containing the data.frame (tibble). We are going to extract the first (and only) object of the list.
+```
+table <- table[[1]]
+```
 
 
 
