@@ -15,7 +15,7 @@ library(RSwissMaps)
 setwd("C:/Users/Username/MyFolder/")
 ```
 
-**Step 1 : retrieve the table listing all municipalities** <br/>
+## Step 1 : retrieve the table listing all municipalities <br/>
 
 Define the webpage we are going to retrieve and read the page
 ```
@@ -48,7 +48,7 @@ swissdata$Einwohner <- str_replace(swissdata$Einwohner,"'","")
 swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 ```
 <br/>
-**Step 2 : retrieve links to Swiss municipalities wikipedia pages** <br/>
+## Step 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
 The links are part of the html page we already retrieved (object "webage"). We are going to extract all links (in html code: "href") contained in the table only.
 
 ```
