@@ -32,6 +32,9 @@ The newly created object `table' is a list containing the data.frame (tibble). W
 ```
 swissdata <- table[[1]]
 ```
+You should obtain a table like this one : <br/>
+![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden.png)
+
 
 
 
