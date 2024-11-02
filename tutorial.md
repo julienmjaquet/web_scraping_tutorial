@@ -4,7 +4,7 @@ This tutorial was originally written for a bachelor course at the University of 
 
 For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden). <br/>
 <br/>
-Before starting any automatic retrieval of data from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt). In our example, it reads as follows: "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
+Before starting any automatic retrieval of data from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt) and follow its instructions. In our example, it reads as follows: "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
 
 First, we have to load the necessary libraries and set the working path.
 ``` 
