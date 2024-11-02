@@ -90,6 +90,8 @@ Now, we can add it to our table.
 swissdata$links <- links
 View(swissdata)
 ```
+![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden2.png)
+
 
 ## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
 
