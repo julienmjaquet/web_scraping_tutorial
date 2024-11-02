@@ -12,6 +12,7 @@ First, we have to load the necessary libraries and set the working path.
 library(rvest)
 library(dplyr)
 library(stringr)
+library(stringi)
 library(gtable)
 library(RSwissMaps)
 
