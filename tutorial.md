@@ -4,7 +4,7 @@ This tutorial was originally written for a bachelor course at the University of 
 
 For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden). <br/>
 <br/>
-Before starting any automatic retrieval of data from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt). In our example, it reads as follows : "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
+Before starting any automatic retrieval of data from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt). In our example, it reads as follows: "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
 
 First, we have to load the necessary libraries and set the working path.
 ``` 
@@ -59,7 +59,7 @@ links <- webpage %>%
   html_nodes(xpath = "//table//a")  %>%
   html_attr("href")
 ```
-For each municipality, we actually retrieved 3 links : one to the municipality wiki page, one to the kanton wiki page and one to the flag of the kanton. This is why we have 3 times more links than needed.
+For each municipality, we actually retrieved 3 links : one to the municipality wiki page, one to the kanton wiki page and one to the flag of the kanton. Hence the 3 times more links retrieved.
 ```
 length(links)
 ```
@@ -75,9 +75,16 @@ head(links)
 ```
 [1] "/wiki/Aadorf"    "/wiki/Aarau"     "/wiki/Aarberg"   "/wiki/Aarburg"   "/wiki/Aarwangen" "/wiki/Abtwil_AG"
 ```
-Links retrieved in such a way typically do not include
-
-in an html page typically do not incluided
+Links retrieved in such a way typically do not include the root part of the web link. Thus, we need to add it.
+```
+links <- paste("https://de.wikipedia.org",links,sep="")
+head(links)
+```
+```
+[1] "https://de.wikipedia.org/wiki/Aadorf"    "https://de.wikipedia.org/wiki/Aarau"    
+[3] "https://de.wikipedia.org/wiki/Aarberg"   "https://de.wikipedia.org/wiki/Aarburg"  
+[5] "https://de.wikipedia.org/wiki/Aarwangen" "https://de.wikipedia.org/wiki/Abtwil_AG"
+```
 
 
 ## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
