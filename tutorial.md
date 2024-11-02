@@ -1,6 +1,6 @@
 # Introduction to web scraping using R <br/>
 
-This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024. <br/>
+This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024 (see the full code in one chunk at the end of this page) <br/>
 
 For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden). <br/>
 
@@ -34,6 +34,20 @@ swissdata <- table[[1]]
 ```
 You should obtain a table like this one : <br/>
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden.png)
+<br/>
+As can be seen, the column/variable "Einwohner" is of the character type because of the *thousands separator* which prevents R to automatically recognize it as a numeric variable.
+```
+is.character(swissdata$Einwohner)
+```
+```
+[1] TRUE
+```
+We can remove it and transform the variable into a numeric one.
+```
+swissdata$Einwohner <- str_replace(table$Einwohner,"'","")
+swissdata$Einwohner <- as.numeric(table$Einwohner)
+```
+
 
 
 
