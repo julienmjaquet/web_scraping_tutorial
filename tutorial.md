@@ -3,6 +3,7 @@
 This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024 (see the full code in one chunk at the end of this page) <br/>
 
 For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden). <br/>
+<br/>
 Before starting any automatic retrieve information from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt).
 It reads as follows : "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
 
