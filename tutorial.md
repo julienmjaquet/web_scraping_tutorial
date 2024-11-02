@@ -1,4 +1,4 @@
-# Introduction to web scraping using R# <br/>
+# Introduction to web scraping using R <br/>
 
 This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024. <br/>
 
@@ -17,7 +17,11 @@ setwd("C:/Users/Username/MyFolder/")
 
 **Step 1 : retrieve the table listing all municipalities** <br/>
 
-
+Define the webpage we are going to retrieve and read the page
+```
+link <- "https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden"
+webpage <- read_html(link)
+``` 
 
 
 
