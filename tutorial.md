@@ -44,9 +44,40 @@ is.character(swissdata$Einwohner)
 ```
 We can remove it and transform the variable into a numeric one.
 ```
-swissdata$Einwohner <- str_replace(table$Einwohner,"'","")
-swissdata$Einwohner <- as.numeric(table$Einwohner)
+swissdata$Einwohner <- str_replace(swissdata$Einwohner,"'","")
+swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 ```
+<br/>
+**Step 2 : retrieve links to Swiss municipalities wikipedia pages** <br/>
+The links are part of the html page we already retrieved (object "webage"). We are going to extract all links (in html code: "href") contained in the table only.
+
+```
+links <- webpage %>% 
+  html_nodes(xpath = "//table//a")  %>%
+  html_attr("href")
+```
+For each municipality, we actually retrieved 3 links : one to the municipality wiki page, one to the kanton wiki page and one to the flag of the kanton. This is why we have 3 times more links than needed.
+```
+length(links)
+```
+```
+[1] 6393
+```
+We can remove the links we are not interested by identifying those that contain the terms ".svg" (image file) or "Kanton."
+```
+check <- grepl(".svg|Kanton",links)
+links <- links[check=="FALSE"]
+head(links)
+```
+```
+[1] "/wiki/Aadorf"    "/wiki/Aarau"     "/wiki/Aarberg"   "/wiki/Aarburg"   "/wiki/Aarwangen" "/wiki/Abtwil_AG"
+```
+
+
+
+**Step 3 : loop over all municipalities web pages to retrieve additional information** <br/>
+
+
 
 
 
