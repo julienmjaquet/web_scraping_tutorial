@@ -30,8 +30,10 @@ table <- webpage %>%
 ```
 The newly created object `table' is a list containing the data.frame (tibble). We are going to extract the first (and only) object of the list.
 ```
-table <- table[[1]]
+swissdata <- table[[1]]
 ```
+
+
 
 
 
