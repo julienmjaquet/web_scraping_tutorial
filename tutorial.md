@@ -103,7 +103,7 @@ First, we generate an empty dataframe where we are going to store the results.
 ```
 personalities <- data.frame()
 ```
-Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it might be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). For this end, it is useful to shuffle our data before each try.
+Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it may be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). For this end, it is useful to shuffle our data before each try.
 ```
 swissdata <- swissdata[sample(nrow(swissdata)),]
 ```
@@ -173,13 +173,12 @@ While it is possible to increase the speed of data retrieval, you may blocked by
 <br/>
 In the end, your dataset should look like this (here's a sample based on about 10% of all municipalities' personalities) : <br/>
 
-**N.B.** If you wish to use the retrieved data for an analysis, you might want to consider the following points : <br/>
+**N.B.** If you wish to use the retrieved data for an analysis, you may want to consider the following points : <br/>
 * Some pages do not include a "personalities" section but link to an external page "Personalities". Data from these pages was not retrieved.
 * Some pages simply do not include a "personalities" section. This does not mean there aren't any personalities related to the municipality.
 * Some pages do not have a proper "personalities" section but mention "personalities" in other sections. Data from other sections was not retrieved.
 * The code is based on Wikipedia pages in German. It is therefore possible that Swiss German municipalities have on average a longer list of personalities compared to French-speaking or Italian-speaking municipalities. However, such a difference may come from the fact that German-speaking Wikipedia authors know less about other regions' personalities.
-* A given name may appear several times in the data. For example,  the municipality where t
-*  
+* A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality she spent most of her life. 
 
 
 
