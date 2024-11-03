@@ -172,7 +172,9 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use it at your own risks. <br/>
 <br/>
 In the end, your dataset should look like this (here's a sample based on about 13% of all municipalities' personalities) : <br/>
+
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_personalities.png)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 **N.B.** If you wish to use the retrieved data for an analysis, you may want to consider the following points : <br/>
 * Some pages do not include a "personalities" section but link to an external page "Personalities". Data from these pages was not retrieved.
@@ -181,8 +183,9 @@ In the end, your dataset should look like this (here's a sample based on about 1
 * The code is based on Wikipedia pages in German. It is therefore possible that Swiss German municipalities have on average a longer list of personalities compared to French-speaking or Italian-speaking municipalities. However, such a difference may come from the fact that German-speaking Wikipedia authors know less about other regions' personalities.
 * A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality she spent most of her life. 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+<br/>
 
-
+Now, let us review the loop into more details. <br/>
 
 
 
