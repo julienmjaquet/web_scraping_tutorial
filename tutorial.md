@@ -200,8 +200,19 @@ At each iteration, we want first to extract the web link of the municipality of 
   link <- swissdata$links[i]
   webpage <- read_html(link)
 ```
+Then, we retrieve all section titles ("h2") and lists ("ul"), which we transform into text with ```htm_text2()```.
+```
+  personalichkeiten <- webpage %>%
+    html_elements("h2,ul") %>%
+    html_text2()
+```
+We want to identify which section refer to "Personalities".
+```
+ check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
+```
+The next part of the code 
+```
+if (length(check) == 1){
 
-
-
-
-
+}
+```
