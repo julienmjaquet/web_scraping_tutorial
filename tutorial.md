@@ -116,8 +116,6 @@ for (i in 1:nrow(swissdata)){
   link <- swissdata$links[i]
   webpage <- read_html(link)
 
-  Sys.sleep(1)
-
   personalichkeiten <- webpage %>%
     html_elements("h2,ul") %>%
     html_text2()
