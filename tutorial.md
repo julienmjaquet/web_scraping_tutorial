@@ -19,7 +19,7 @@ library(RSwissMaps)
 setwd("C:/Users/Username/MyFolder/")
 ```
 
-## Step 1 : retrieve the table listing all municipalities <br/>
+## Part 1 : retrieve the table listing all municipalities <br/>
 
 Define the webpage we are going to retrieve and read the page
 ```
@@ -52,7 +52,7 @@ swissdata$Einwohner <- str_replace(swissdata$Einwohner,"'","")
 swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 ```
 
-## Step 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
+## Part 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
 
 The links are part of the html page we already retrieved (object "webage"). We are going to extract all links (in html code: "href") contained in the table only.
 
@@ -95,7 +95,7 @@ View(swissdata)
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden2.png)
 
 
-## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
+## Part 3 : loop over all municipalities web pages to retrieve additional information <br/>
 
 We are going to loop over all of the municipalities wiki pages to retrieve data about all personalities listed in each page. <br/>
 
@@ -168,7 +168,8 @@ Sys.sleep(runif(1, 5, 10))
 print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
 }
 ```
-
+**N.B.** In its current form, the code takes about 4h45 to retrieve all data because of the line ```Sys.sleep(runif(1, 5, 10))```, which randomly pauses between 5 and 10 seconds between each iteration.
+While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use at your own risks.
 
 
 
