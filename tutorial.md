@@ -206,13 +206,29 @@ Then, we retrieve all section titles ("h2") and lists ("ul"), which we transform
     html_elements("h2,ul") %>%
     html_text2()
 ```
-We want to identify which section refer to "Personalities".
+We want to identify which section refer to "Personalities". This command gives the position in "personlichkeiten" where the words "Persönlichkeiten" or "Söhne und Töchter" can be found (if any). We store this information in the object "check".
 ```
  check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
 ```
-The next part of the code will only be launched if a "Personalities" section was found (that is if the object "check" is not of null length). Otherwise, the iteration continues at the very end of the loop with ```Sys.sleep()```
+The next part of the code will only be launched if a "Personalities" section was found (that is if the object "check" is not of null length). Otherwise, the iteration continues at the very end of the loop with ```Sys.sleep()```.
 ```
 if (length(check) == 1){
 
 }
 ```
+Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then,  (\\n)
+```
+    personalichkeiten <- personalichkeiten[check+1]
+    personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
+``` 
+
+
+```
+  titles <- webpage %>%
+      html_elements("h2") %>%
+      html_text2()
+
+    check2 <- personalichkeiten %in% titles
+    check2 <- check2[1]
+```
+
