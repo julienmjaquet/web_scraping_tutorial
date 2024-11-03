@@ -97,7 +97,79 @@ View(swissdata)
 
 ## Step 3 : loop over all municipalities web pages to retrieve additional information <br/>
 
+We are going to loop over all of the municipalities wiki pages to retrieve data about all personalities listed in each page. <br/>
 
+First, we generate an empty dataframe where we are going to store the results. 
+```
+personalities <- data.frame()
+```
+Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it might be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). For this end, it is useful to shuffle our data before each try.
+```
+swissdata <- swissdata[sample(nrow(swissdata)),]
+```
+We are now ready to loop over all rows of the dataframe "swissdata" which contains all municipalities web links. Each part of the loop is described separately below.
+
+```
+
+for (i in 1:nrow(swissdata)){
+  
+  link <- swissdata$links[i]
+  webpage <- read_html(link)
+
+  Sys.sleep(1)
+
+  personalichkeiten <- webpage %>%
+    html_elements("h2,ul") %>%
+    html_text2()
+  check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
+
+
+  if (length(check) == 1){
+    personalichkeiten <- personalichkeiten[check+1]
+    personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
+
+    titles <- webpage %>%
+      html_elements("h2") %>%
+      html_text2()
+
+    check2 <- personalichkeiten %in% titles
+    check2 <- check2[1]
+
+    if (check2==FALSE){
+
+      for (j in 1:length(personalichkeiten)){
+
+      test <- grepl("[0-9]",personalichkeiten)[j]
+
+        if (test == TRUE){
+          a <- unlist(strsplit(personalichkeiten[j],"),"))
+          b <- unlist(strsplit(a[1],"\\("))
+          name <- b[1]
+          geburtsjahr <- stri_extract_first_regex(b[2], "[0-9][0-9][0-9][0-9]")
+          todesjahr <- stri_extract_last_regex(b[2], "[0-9][0-9][0-9][0-9]")
+          same <- geburtsjahr == todesjahr
+          todesjahr[same==TRUE] <- NA
+          beschreibung <- a[2]
+        }else{
+          a <- unlist(strsplit(personalichkeiten[j],","))
+          name <- a[1]
+          geburtsjahr <- NA
+          todesjahr <- NA
+          beschreibung <- paste(a[2:length(a)], collapse =" ")
+        }    
+        gemeinde <- swissdata$`Offizieller Gemeindename`[i]
+        kanton <- swissdata$Kanton[i]
+        bfs_nr <- swissdata$`BFS-Nr.`[i]
+        personalities_j <- data.frame(name,geburtsjahr,todesjahr,beschreibung,gemeinde,bfs_nr,kanton)
+        personalities <- rbind(personalities,personalities_j)
+      }
+    }
+  rm(check,check2)
+  }
+Sys.sleep(runif(1, 5, 10))
+print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
+}
+```
 
 
 
