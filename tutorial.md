@@ -1,6 +1,6 @@
 # Introduction to web scraping using R <br/>
 
-This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024 (see the full code in one chunk at the end of this page) <br/>
+This tutorial was originally written for a bachelor course at the University of Fribourg, Switzerland, on November 2024. <br/>
 
 For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden). <br/>
 <br/>
@@ -216,7 +216,7 @@ if (length(check) == 1){
 
 }
 ```
-Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a newline, we can use the character to  "\\n"
+Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). The returned object being a list, we still need to unlist it.
 ```
     personalichkeiten <- personalichkeiten[check+1]
     personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
@@ -228,7 +228,29 @@ Now, let us extract the names of the personnalities. They are located just after
       html_elements("h2") %>%
       html_text2()
 
-    check2 <- personalichkeiten %in% titles
-    check2 <- check2[1]
+  
 ```
+
+```
+      check2 <- personalichkeiten %in% titles
+      check2 <- check2[1]
+```
+
+```
+ if (check2==FALSE){
+
+
+}else{
+
+}
+```
+
+```
+     for (j in 1:length(personalichkeiten)){
+
+
+    }
+```
+
+
 
