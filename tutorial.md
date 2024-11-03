@@ -187,12 +187,19 @@ In the end, your dataset should look like this (here's a sample based on about 1
 
 Now, let us review the loop into more details. <br/>
 
+We are going to loop over all rows of the dataframe "swissdata" using the link retrieved previously. 
+```
+for (i in 1:nrow(swissdata)){
 
+#code to repeat at each iteration
 
-
-
-
-
+}
+```
+At each iteration, we want first to extract the web link of the municipality of row `i` and read the html page.
+```
+  link <- swissdata$links[i]
+  webpage <- read_html(link)
+```
 
 
 
