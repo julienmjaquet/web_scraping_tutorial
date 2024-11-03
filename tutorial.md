@@ -169,7 +169,13 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 }
 ```
 **N.B.** In its current form, the code takes about 4h45 to retrieve all data because of the line ```Sys.sleep(runif(1, 5, 10))```, which randomly pauses between 5 and 10 seconds between each iteration.
-While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use at your own risks.
+While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use it at your own risks. <br/>
+<br/>
+In the end, your dataset should look like this (here's a sample based on about 10% of all municipalities' personalities) : <br/>
+
+**N.B.** If you wish to use the data retrieved for an analysis, you might want to consider the following points : <br/>
+* aaa
+* bbb
 
 
 
