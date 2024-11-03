@@ -183,7 +183,6 @@ In the end, your dataset should look like this (here's a sample based on about 1
 * The code is based on Wikipedia pages in German. It is therefore possible that Swiss German municipalities have on average a longer list of personalities compared to French-speaking or Italian-speaking municipalities. However, such a difference may come from the fact that German-speaking Wikipedia authors know less about other regions' personalities.
 * A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality she spent most of her life. 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-<br/>
 
 ## Part 3.2 : review of the loop
 
