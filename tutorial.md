@@ -257,5 +257,5 @@ Now, let us extract the names of the personnalities. They are located just after
 
 
 
-To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
+> To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
 
