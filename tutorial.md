@@ -210,7 +210,7 @@ We want to identify which section refer to "Personalities".
 ```
  check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
 ```
-The next part of the code 
+The next part of the code will only be launched if a "Personalities" section was found (that is if the object "check" is not of null length). Otherwise, the iteration continues at the very end of the loop with ```Sys.sleep()```
 ```
 if (length(check) == 1){
 
