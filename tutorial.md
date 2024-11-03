@@ -95,7 +95,7 @@ View(swissdata)
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden2.png)
 
 
-## Part 3 : loop over all municipalities web pages to retrieve additional information <br/>
+## Part 3.1 : loop over all municipalities web pages to retrieve additional information <br/>
 
 We are going to loop over all of the municipalities wiki pages to retrieve data about personalities associated to each municipality. Most municipalities include a section about personalities. <br/>
 
@@ -184,6 +184,8 @@ In the end, your dataset should look like this (here's a sample based on about 1
 * A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality she spent most of her life. 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 <br/>
+
+## Part 3.2 : review of the loop
 
 Now, let us review the loop into more details. <br/>
 
