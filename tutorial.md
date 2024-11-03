@@ -103,7 +103,7 @@ First, we generate an empty dataframe where we are going to store the results.
 ```
 personalities <- data.frame()
 ```
-Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it may be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). For this end, it is useful to shuffle our data before each try.
+Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it may be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). It is thereFor this end, it is useful to shuffle our data before each try.
 ```
 swissdata <- swissdata[sample(nrow(swissdata)),]
 ```
@@ -170,6 +170,8 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 ```
 **N.B.** In its current form, the code takes about 4h45 to retrieve all data because of the line ```Sys.sleep(runif(1, 5, 10))```, which randomly pauses between 5 and 10 seconds between each iteration.
 While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use it at your own risks. <br/>
+Note also that it is perhaps possible to achieve a more efficient code (with fewer lines of code).
+
 <br/>
 In the end, your dataset should look like this (here's a sample based on about 13% of all municipalities' personalities) : <br/>
 
@@ -217,7 +219,7 @@ if (length(check) == 1){
 
 }
 ```
-Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). The returned object being a list, we still need to unlist it.
+Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). Since the returned object is a list, we still need to unlist it with ```unlist()```.
 ```
     personalichkeiten <- personalichkeiten[check+1]
     personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
@@ -254,4 +256,6 @@ Now, let us extract the names of the personnalities. They are located just after
 ```
 
 
+
+To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
 
