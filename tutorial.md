@@ -242,11 +242,11 @@ We want now to extract each personality's name and information, one by one. Thus
 
     }
 ```
-In the process of extracting information about personalities, there are two alternatives to consider. Either the vector contains information regarding the birth (and possibly the death) of a given personality or there is none. In other words, either the vector contains numbers or it does not. We can test for that with the following piece of code.
+In the process of extracting information about personalities, there are two alternatives to consider. Either the vector contains information regarding the birth (and possibly the death) of a given personality, or there is none. In other words, either the vector contains numbers or it does not. We can test which alternative is correct with the following piece of code.
 ```
       test <- grepl("[0-9]",personalichkeiten)[j]
 ```
-
+If the test is true, we want to execute the first part of the code (alternative A). If it is not, we want to execute the block of code in the `else` brackets (alternative B):
 ```
       if (test == TRUE){
 
@@ -254,8 +254,7 @@ In the process of extracting information about personalities, there are two alte
 
       }
 ```
-
-if test = TRUE
+Alternative A (test = TRUE) : we extract the name of the person (part of the code before the parenthesis). Then we extract the first four digits number (birth year) and the second four digits number (year of death). If there is no year of death (person is still alive), both commands should give the same result. If that is the case, we replace the `todesjahr` with a missing value. The description is located in the second part of the vector `a`.
 ```
           a <- unlist(strsplit(personalichkeiten[j],"),"))
           b <- unlist(strsplit(a[1],"\\("))
@@ -266,7 +265,7 @@ if test = TRUE
           todesjahr[same==TRUE] <- NA
           beschreibung <- a[2]
 ```
-if test = FALSE
+Alternative B (test = FALSE) : same as before but there is no number to extract, so that we attribute missing values to both birth and year of death. Here the description consists of all the remaining text included in the vector `a` (positions 2 to n, which we paste together).
 ```
           a <- unlist(strsplit(personalichkeiten[j],","))
           name <- a[1]
@@ -274,8 +273,7 @@ if test = FALSE
           todesjahr <- NA
           beschreibung <- paste(a[2:length(a)], collapse =" ")
 ```
-
-wheter test true or not
+Whatever the alternative , we wheter test true or not
 ```
         gemeinde <- swissdata$`Offizieller Gemeindename`[i]
         kanton <- swissdata$Kanton[i]
