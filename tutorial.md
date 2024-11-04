@@ -93,19 +93,19 @@ View(swissdata)
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden2.png)
 
 
-## Part 3.1 : loop over all municipalities web pages to retrieve additional information <br/>
+## Part 3.1: Loop Over All Municipalities' Web Pages to Retrieve Additional Information <br/>
 
-We are going to loop over all of the municipalities wiki pages to retrieve data about personalities associated to each municipality. Most municipalities include a section about personalities. <br/>
+We are going to loop over all of the municipalities' wiki pages to retrieve data about notable personalities associated to each municipality. Most municipalities include a section about personalities. <br/>
 
-First, we generate an empty dataframe where we are going to store the results. 
+First, we generate an empty data frame where we will store the results. 
 ```
 personalities <- data.frame()
 ```
-Not all pages include a "personalities" section. Pages that include such a section may be slightly different with regard to the html code of the page. By randomly checking a few pages ("by hand"), we can get an idea of how a page is organized. However, we cannot be sure that we accounted for all variants. Thus, it may be useful to test our R code on a few pages chosen randomly (and repeat the operation until we obtain the desired results). It is thereFor this end, it is useful to shuffle our data before each try.
+Not all pages include a notable "personalities" section. Pages that do include such a section may vary slightly in their HTML code. By randomly checking a few pages manually, we can get an idea of how a page is organized. However, we cannot be sure that we have accounted for all variants. Thus, it may be useful to test our R code on a few randomly chosen pages (and repeat the operation until we obtain the desired results). For this purpose, it is useful to shuffle our data before each try.
 ```
 swissdata <- swissdata[sample(nrow(swissdata)),]
 ```
-We are now ready to loop over all rows of the dataframe "swissdata" which contains all municipalities web links. Each part of the loop is described separately below.
+We are now ready to loop over all rows of the data frame "swissdata", which contains all municipalities' web links. Each part of the loop is described separately below.
 
 ```
 
@@ -166,25 +166,26 @@ Sys.sleep(runif(1, 5, 10))
 print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
 }
 ```
-**N.B.** In its current form, the code takes about 4h45 to retrieve all data because of the line ```Sys.sleep(runif(1, 5, 10))```, which randomly pauses between 5 and 10 seconds between each iteration.
-While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use it at your own risks. <br/>
-Note also that it is perhaps possible to achieve a more efficient code (with fewer lines of code).
+**N.B.** In its current form, the code takes about 4 hours 45 minutes to retrieve all data because of the line ```Sys.sleep(runif(1, 5, 10))```, which randomly pauses between 5 and 10 seconds between each iteration.
+While it is possible to increase the speed of data retrieval, you may blocked by the website if it detects an unsual amount of requests in a short period of time coming from your IP address. Thus, use it at your own risks. More importantly, be respectful of the website you are scraping and avoid overloading the server. Certainly, this can also be achieved with a shorter pause time between each iteration. <br/>
+
+Note also that it may be possible to achieve a more efficient code (with fewer lines of code).
 
 <br/>
-In the end, your dataset should look like this (here's a sample based on about 13% of all municipalities' personalities) : <br/>
+In the end, your dataset should look like this (here's a sample based on about 13% of all municipalities' notable personalities) : <br/>
 
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_personalities.png)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-**N.B.** If you wish to use the retrieved data for an analysis, you may want to consider the following points : <br/>
-* Some pages do not include a "personalities" section but link to an external page "Personalities". Data from these pages was not retrieved.
-* Some pages simply do not include a "personalities" section. This does not mean there aren't any personalities related to the municipality.
+**N.B.** If you wish to use the retrieved data for analysis, you may want to consider the following points: <br/>
+* Some pages do not include a "personalities" section but link to an external page specifically dedicated to the notable personalities of a given municipality. Data from these pages was not retrieved.
+* Some pages simply do not include a "personalities" section. This does not mean there aren't any notable personalities related to the municipality.
 * Some pages do not have a proper "personalities" section but mention "personalities" in other sections. Data from other sections was not retrieved.
-* The code is based on Wikipedia pages in German. It is therefore possible that Swiss German municipalities have on average a longer list of personalities compared to French-speaking or Italian-speaking municipalities. However, such a difference may come from the fact that German-speaking Wikipedia authors know less about other regions' personalities.
-* A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality she spent most of her life. 
+* The code is based on Wikipedia pages in German. It is therefore possible that Swiss German municipalities have, on average, a longer list of notable personalities compared to French-speaking or Italian-speaking municipalities. However, such a difference may come from the fact that German-speaking Wikipedia authors know less about personalities from other regions.
+* A given name may appear several times in the data. For example, in the municipality a person was born and in the municipality they spent most of their life. 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Part 3.2 : review of the loop
+## Part 3.2: Review of the Loop
 
 Now, let us review the loop into more details. <br/>
 
