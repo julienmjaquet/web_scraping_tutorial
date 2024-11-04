@@ -254,7 +254,7 @@ If the test is true, we want to execute the first part of the code (alternative 
 
       }
 ```
-Alternative A (test = TRUE) : we extract the name of the person (part of the code before the parenthesis). Then we extract the first four digits number (birth year) and the second four digits number (year of death). If there is no year of death (person is still alive), both commands should give the same result. If that is the case, we replace the `todesjahr` with a missing value. The description is located in the second part of the vector `a`.
+Alternative A (test == TRUE) : we extract the name of the person (part of the code before the parenthesis). Then we extract the first four digits number (birth year) and the second four digits number (year of death). If there is no year of death (person is still alive), both commands should give the same result. If that is the case, we replace the `todesjahr` with a missing value. The description is located in the second part of the vector `a`.
 ```
           a <- unlist(strsplit(personalichkeiten[j],"),"))
           b <- unlist(strsplit(a[1],"\\("))
@@ -265,7 +265,7 @@ Alternative A (test = TRUE) : we extract the name of the person (part of the cod
           todesjahr[same==TRUE] <- NA
           beschreibung <- a[2]
 ```
-Alternative B (test = FALSE) : same as before but there is no number to extract, so that we attribute missing values to both birth and year of death. Here the description consists of all the remaining text included in the vector `a` (positions 2 to n, which we paste together).
+Alternative B (test == FALSE) : same as before but there is no number to extract, so that we attribute missing values to both birth and year of death. Here the description consists of all the remaining text included in the vector `a` (positions 2 to n, which we paste together).
 ```
           a <- unlist(strsplit(personalichkeiten[j],","))
           name <- a[1]
