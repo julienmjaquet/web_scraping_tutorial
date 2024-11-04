@@ -230,17 +230,13 @@ Some pages do include a "personalities" section but the section links to an exte
   check2 <- personalichkeiten %in% titles
   check2 <- check2[1]
 ```
-If the content of the vector `personalichkeiten' is not part of the object `titles' ```(check2==FALSE)```, this means 
-
+If the content of the vector `personalichkeiten' is not part of the object `titles' ```(check2==FALSE)```, we assume it consists of personalities' names. In this situation, the par of the code below will be executed. If the vector `personalichkeiten` contains the title of a subsequent section, the script will skip the code below.
 ```
- if (check2==FALSE){
-
-
-}else{
+if (check2==FALSE){
 
 }
 ```
-
+We want . (we need to specify another letter than `i` which is already used for the main loop, for example `j`)
 ```
      for (j in 1:length(personalichkeiten)){
 
@@ -248,6 +244,10 @@ If the content of the vector `personalichkeiten' is not part of the object `titl
     }
 ```
 
+
+```
+      test <- grepl("[0-9]",personalichkeiten)[j]
+```
 
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
