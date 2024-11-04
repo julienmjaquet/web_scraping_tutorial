@@ -1,11 +1,12 @@
 # Introduction to web scraping using R <br/>
 
-For the purpose of this tutorial, we are going to retrieve data from Wikipedia. More specifically, we are going to retrieve data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden) and their associated personalities. <br/>
+For this tutorial, we will retrieve data from Wikipedia, specifically data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden) and their associated notable personalities. <br/>
 <br/>
-Before starting any automatic retrieval of data from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt) and **follow its instructions**. In our example, it reads as follows: <br/>
+Before starting any automatic data retrieval from a web page, one should always read the ["robots.txt" file](https://en.wikipedia.org/robots.txt) and **follow its instructions**. In our example, it reads as follows: <br/>
+
 > "*[...] There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast. If you're irresponsible, your access to the site may be blocked.*" <br/>
 
-First, we have to load the necessary libraries and set the working path.
+First, we need to load the necessary libraries and set the working directory.
 ``` 
 library(rvest)
 library(dplyr)
@@ -52,7 +53,7 @@ swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 
 ## Part 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
 
-The links are part of the html page we already retrieved (object "webage"). We are going to extract all links (in html code: "href") contained in the table only.
+The links are part of the html page we already retrieved (object "webpage"). We are going to extract all links (in html code: "href") contained in the table only.
 
 ```
 links <- webpage %>% 
