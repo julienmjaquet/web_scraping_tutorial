@@ -240,11 +240,9 @@ We want now to extract each personality's name and information, one by one. Thus
 ```
      for (j in 1:length(personalichkeiten)){
 
-
     }
 ```
-In the process of extracting information about personalities, there are two alternatives to consider. Either the 
-
+In the process of extracting information about personalities, there are two alternatives to consider. Either the vector contains information regarding the birth (and possibly the death) of a given personality or there is none. In other words, either the vector contains numbers or it does not. We can test for that with the following piece of code.
 ```
       test <- grepl("[0-9]",personalichkeiten)[j]
 ```
@@ -302,6 +300,4 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 ```
 
 
-
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
-
