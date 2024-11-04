@@ -222,7 +222,7 @@ Now, let us extract the names of the personnalities. They are located just after
     personalichkeiten <- personalichkeiten[check+1]
     personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
 ``` 
-Some pages do include a "personalities" section but the section links to an external page "Personalities". In such cases, there are no personalities' names within the page. This means that at the position `check+1' in the `personalichkeiten' object, there is the title of the next section (which we do not want.) The code below accounts for that possibility by retrieving only the titles of the page ("h2") and making sure our `personalichkeiten' vector is not part of the titles (but consist of names). 
+Some pages do include a "personalities" section but the section links to an external page "Personalities". In such cases, there are no personalities' names within the page. This means that at the position `check+1` in the `personalichkeiten` object, there is the title of the next section (which we do not want.) The code below accounts for that possibility by retrieving only the titles of the page ("h2") and making sure our "personalichkeiten" vector is not part of the titles (but consist of names). 
 ```
   titles <- webpage %>%
       html_elements("h2") %>%
