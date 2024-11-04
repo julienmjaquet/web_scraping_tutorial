@@ -217,25 +217,21 @@ if (length(check) == 1){
 
 }
 ```
-Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). Since the returned object is a list, we still need to unlist it with ```unlist()```.
+Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). Since the returned object is a list, we still need to unlist it with the command ```unlist()```.
 ```
     personalichkeiten <- personalichkeiten[check+1]
     personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
 ``` 
-
+Some pages do include a "personalities" section but the section links to an external page "Personalities". In such cases, there are no personalities' names within the page. This means that at the position `check+1' in the `personalichkeiten' object, there is the title of the next section (which we do not want.) The code below accounts for that possibility by retrieving only the titles of the page ("h2") and making sure our personalichkeiten vector is not part of the titles (but consist of names).
 
 ```
   titles <- webpage %>%
       html_elements("h2") %>%
       html_text2()
-
-  
+  check2 <- personalichkeiten %in% titles
+  check2 <- check2[1]
 ```
 
-```
-      check2 <- personalichkeiten %in% titles
-      check2 <- check2[1]
-```
 
 ```
  if (check2==FALSE){
