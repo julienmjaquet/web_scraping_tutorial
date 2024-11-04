@@ -18,27 +18,26 @@ library(RSwissMaps)
 setwd("C:/Users/Username/MyFolder/")
 ```
 
-## Part 1 : retrieve the table listing all municipalities <br/>
+## Part 1: Retrieve the Table Listing All Municipalities <br/>
 
-Define the webpage we are going to retrieve and read the page
+Define the webpage we are going to retrieve and read the page.
 ```
 link <- "https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden"
 webpage <- read_html(link)
 ``` 
-
 Extract the table (by specifying the character used as a decimal place marker).
 ``` 
 table <- webpage %>%
   html_table(dec=",")
 ```
-The newly created object `table' is a list containing the data.frame (tibble). We are going to extract the first (and only) object of the list.
+The newly created object `table` is a list containing the data frame (tibble). We will extract the first (and only) object of the list.
 ```
 swissdata <- table[[1]]
 ```
 You should obtain a table like this one : <br/>
 ![alt text](https://github.com/julienmjaquet/web_scraping_tutorial/blob/main/table_gemeinden.png)
 <br/>
-As can be seen, the column/variable "Einwohner" is of the character type because of the *thousands separator* which prevents R to automatically recognize it as a numeric variable.
+As can be seen, the column/variable "Einwohner" is of the character type because of the *thousands separator* prevents R from automatically recognizing it as a numeric variable.
 ```
 is.character(swissdata$Einwohner)
 ```
@@ -51,23 +50,23 @@ swissdata$Einwohner <- str_replace(swissdata$Einwohner,"'","")
 swissdata$Einwohner <- as.numeric(swissdata$Einwohner)
 ```
 
-## Part 2 : retrieve links to Swiss municipalities wikipedia pages <br/>
+## Part 2: Retrieve Links to Swiss Municipalities' Wikipedia Pages <br/>
 
-The links are part of the html page we already retrieved (object "webpage"). We are going to extract all links (in html code: "href") contained in the table only.
+The links are part of the HTML page we already retrieved (object "webpage"). We are going to extract all links (in HTML code: "href") contained in the table only.
 
 ```
 links <- webpage %>% 
   html_nodes(xpath = "//table//a")  %>%
   html_attr("href")
 ```
-For each municipality, we actually retrieved 3 links : one to the municipality wiki page, one to the kanton wiki page and one to the flag of the kanton. Hence the 3 times more links retrieved.
+For each municipality, we actually retrieved three links: one to the municipality's wiki page, one to the canton's wiki page, and one to canton's flag. Hence, three times more links retrieved.
 ```
 length(links)
 ```
 ```
 [1] 6393
 ```
-We can remove the links we are not interested by identifying those that contain the terms ".svg" (image file) or "Kanton."
+We can remove the links we are not interested in by identifying those that contain the terms ".svg" (image file) or "Kanton."
 ```
 check <- grepl(".svg|Kanton",links)
 links <- links[check=="FALSE"]
