@@ -1,4 +1,4 @@
-# Introduction to web scraping using R <br/>
+# Introduction to Web Scraping Using R <br/>
 
 For this tutorial, we will retrieve data from Wikipedia, specifically data on all [Swiss municipalities](https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden) and their associated notable personalities. <br/>
 <br/>
