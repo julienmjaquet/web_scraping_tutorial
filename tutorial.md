@@ -285,12 +285,11 @@ Let us remove the objects `check` and `check2` to ensure they do not exist befor
 ```
 rm(check,check2)
 ```
-The two last lines of the code are not absolutely necessary for the code to work properly but they are still important. First, the command `Sys.sleep` pauses R for n seconds (random time between 5 and 10 seconds). 
+The two last lines of the code are not absolutely necessary for the code to work properly but they are still important. First, the command `Sys.sleep` pauses R for n seconds (random time between 5 and 10 seconds). This aims at reducing the number of requests made to the server. This is a good practice in general and also limits the risk of having its IP address being banned. Finally, the command `print()` literally prints the desired message at each iteration. In this case, it gives us an idea of which amount of data was already retrieved (and for which municipalities).
 ```
 Sys.sleep(runif(1, 5, 10))
 print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
 ```
-
 
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
