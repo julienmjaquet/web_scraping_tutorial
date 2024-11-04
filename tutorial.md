@@ -230,24 +230,77 @@ Some pages do include a "personalities" section but the section links to an exte
   check2 <- personalichkeiten %in% titles
   check2 <- check2[1]
 ```
-If the content of the vector `personalichkeiten' is not part of the object `titles' ```(check2==FALSE)```, we assume it consists of personalities' names. In this situation, the par of the code below will be executed. If the vector `personalichkeiten` contains the title of a subsequent section, the script will skip the code below.
+If the content of the vector `personalichkeiten` is not part of the object `titles` ```(check2==FALSE)```, we assume it consists of personalities' names. In this situation, the par of the code below will be executed. If the vector `personalichkeiten` contains the title of a subsequent section, the script will skip the code below.
 ```
 if (check2==FALSE){
 
 }
 ```
-We want . (we need to specify another letter than `i` which is already used for the main loop, for example `j`)
+We want now to extract each personality's name and information, one by one. Thus, we are going to loop over all the elements of the vector `personalichkeiten`. Since its a vector, we specify ```length()``` instead of ```nrow()```. In addition, we specify any other letter than `i` is already used for the main loop (for example `j`).
 ```
      for (j in 1:length(personalichkeiten)){
 
 
     }
 ```
-
+In the process of extracting information about personalities, there are two alternatives to consider. Either the 
 
 ```
       test <- grepl("[0-9]",personalichkeiten)[j]
 ```
+
+```
+      if (test == TRUE){
+
+      }else{
+
+      }
+```
+
+if test = TRUE
+```
+          a <- unlist(strsplit(personalichkeiten[j],"),"))
+          b <- unlist(strsplit(a[1],"\\("))
+          name <- b[1]
+          geburtsjahr <- stri_extract_first_regex(b[2], "[0-9][0-9][0-9][0-9]")
+          todesjahr <- stri_extract_last_regex(b[2], "[0-9][0-9][0-9][0-9]")
+          same <- geburtsjahr == todesjahr
+          todesjahr[same==TRUE] <- NA
+          beschreibung <- a[2]
+```
+if test = FALSE
+```
+          a <- unlist(strsplit(personalichkeiten[j],","))
+          name <- a[1]
+          geburtsjahr <- NA
+          todesjahr <- NA
+          beschreibung <- paste(a[2:length(a)], collapse =" ")
+```
+
+wheter test true or not
+```
+        gemeinde <- swissdata$`Offizieller Gemeindename`[i]
+        kanton <- swissdata$Kanton[i]
+        bfs_nr <- swissdata$`BFS-Nr.`[i]
+        personalities_j <- data.frame(name,geburtsjahr,todesjahr,beschreibung,gemeinde,bfs_nr,kanton)
+        personalities <- rbind(personalities,personalities_j)
+```
+
+remove
+```
+rm(check,check2)
+```
+
+important
+```
+Sys.sleep(runif(1, 5, 10))
+```
+
+useful but not absolutely necessary
+```
+print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
+```
+
 
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
