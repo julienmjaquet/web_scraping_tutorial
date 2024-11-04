@@ -187,7 +187,7 @@ In the end, your dataset should look like this (here's a sample based on about 1
 
 ## Part 3.2: Review of the Loop
 
-Now, let us review the loop into more details. <br/>
+Now, let us review the loop in more detail. <br/>
 
 We are going to loop over all rows of the dataframe "swissdata" using the link retrieved previously. 
 ```
@@ -197,7 +197,7 @@ for (i in 1:nrow(swissdata)){
 
 }
 ```
-At each iteration, we want first to extract the web link of the municipality of row `i` and read the html page.
+At each iteration, we first want to extract the web link of the municipality in row `i` and read the HTML page.
 ```
   link <- swissdata$links[i]
   webpage <- read_html(link)
@@ -208,22 +208,22 @@ Then, we retrieve all section titles ("h2") and lists ("ul"), which we transform
     html_elements("h2,ul") %>%
     html_text2()
 ```
-We want to identify which section refer to "Personalities". This command gives the position in "personlichkeiten" where the words "Persönlichkeiten" or "Söhne und Töchter" can be found (if any). We store this information in the object "check".
+We want to identify which section refers to "personalities". This command gives the position in "personlichkeiten" where the words "Persönlichkeiten" or "Söhne und Töchter" can be found (if any). We store this information in the object "check".
 ```
  check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
 ```
-The next part of the code will only be launched if a "Personalities" section was found (that is if the object "check" is not of null length). Otherwise, the iteration continues at the very end of the loop with ```Sys.sleep()```.
+The next part of the code will only be executed if a "Personalities" section is found (that is, if the object "check" is not of null length). Otherwise, the iteration continues at the very end of the loop with ```Sys.sleep()```.
 ```
 if (length(check) == 1){
 
 }
 ```
-Now, let us extract the names of the personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (that is, make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (= unique character object) into several parts (command ```strsplit()```). Since the returned object is a list, we still need to unlist it with the command ```unlist()```.
+Now, let us extract the names of the notable personnalities. They are located just after the title of the section (hence, ```[check+1]```). The rest of the text included in the object "personalichkeiten" is erased. Then, we need to split the character object into several parts (i.e., make it a vector). Since each name appears on a new line, we can use the character defining a new line ("\\n") to split the whole text (a unique character object) into several parts (command ```strsplit()```). Since the returned object is a list, we still need to unlist it with the command ```unlist()```.
 ```
     personalichkeiten <- personalichkeiten[check+1]
     personalichkeiten <- unlist(strsplit(personalichkeiten, "\n"))
 ``` 
-Some pages do include a "personalities" section but the section links to an external page "Personalities". In such cases, there are no personalities' names within the page. This means that at the position `check+1` in the `personalichkeiten` object, there is the title of the next section (which we do not want.) The code below accounts for that possibility by retrieving only the titles of the page ("h2") and making sure our "personalichkeiten" vector is not part of the titles (but consist of names). 
+Some pages do include a "personalities" section, but the section links to an external page specifically dedicated to the notable personalities. In such cases, there are no personalities' names within the page. This means that at the position `check+1` in the `personalichkeiten` object, there is the title of the next section (which we do not want.) The code below accounts for that possibility by retrieving only the titles of the page ("h2") and making sure our "personalichkeiten" vector is not part of the titles (but consist of names). 
 ```
   titles <- webpage %>%
       html_elements("h2") %>%
@@ -231,19 +231,19 @@ Some pages do include a "personalities" section but the section links to an exte
   check2 <- personalichkeiten %in% titles
   check2 <- check2[1]
 ```
-If the content of the vector `personalichkeiten` is not part of the object `titles` ```(check2==FALSE)```, we assume it consists of personalities' names. In this situation, the par of the code below will be executed. If the vector `personalichkeiten` contains the title of a subsequent section, the script will skip the code below.
+If the content of the vector `personalichkeiten` is not part of the object `titles` ```(check2==FALSE)```, we assume it consists of personalities' names. In this situation, the part of the code below will be executed. If the vector `personalichkeiten` contains the title of a subsequent section, the script will skip the code below.
 ```
 if (check2==FALSE){
 
 }
 ```
-We want now to extract each personality's name and information, one by one. Thus, we are going to loop over all the elements of the vector `personalichkeiten`. Since its a vector, we specify ```length()``` instead of ```nrow()```. In addition, we specify any other letter than `i` is already used for the main loop (for example `j`).
+We now want to extract each personality's name and information, one by one. Thus, we are going to loop over all the elements of the vector `personalichkeiten`. Since it's a vector, we specify ```length()``` instead of ```nrow()```. Additionally, we use a different letter than `i` for the inner loop (for example, `j`).
 ```
      for (j in 1:length(personalichkeiten)){
 
     }
 ```
-In the process of extracting information about personalities, there are two alternatives to consider. Either the vector contains information regarding the birth (and possibly the death) of a given personality, or there is none. In other words, either the vector contains numbers or it does not. We can test which alternative is correct with the following piece of code.
+In the process of extracting information about notable personalities, there are now two alternatives to consider. Either the vector contains information regarding the birth (and possibly the death) of a given personality, or it does not. In other words, either the vector contains numbers or it does not. We can test which alternative is correct with the following piece of code.
 ```
       test <- grepl("[0-9]",personalichkeiten)[j]
 ```
@@ -255,7 +255,7 @@ If the test is true, we want to execute the first part of the code (alternative 
 
       }
 ```
-Alternative A (test == TRUE) : we extract the name of the person (part of the code before the parenthesis). Then we extract the first four digits number (birth year) and the second four digits number (year of death). If there is no year of death (person is still alive), both commands should give the same result. If that is the case, we replace the `todesjahr` with a missing value. The description is located in the second part of the vector `a`.
+Alternative A (test == TRUE): We extract the name of the person (part of the code before the parenthesis). Then we extract the first four-digit number (birth year) and the second four-digit number (year of death). If there is no year of death (the person is still alive), both commands should give the same result. If that is the case, we attribute a missing value to the `todesjahr` object. The description is located in the second part of the vector `a`.
 ```
           a <- unlist(strsplit(personalichkeiten[j],"),"))
           b <- unlist(strsplit(a[1],"\\("))
@@ -266,7 +266,7 @@ Alternative A (test == TRUE) : we extract the name of the person (part of the co
           todesjahr[same==TRUE] <- NA
           beschreibung <- a[2]
 ```
-Alternative B (test == FALSE) : same as before but there is no number to extract, so that we attribute missing values to both birth and year of death. Here the description consists of all the remaining text included in the vector `a` (positions 2 to n, which we paste together).
+Alternative B (test == FALSE): Same as before, but there is no number to extract, so that we attribute missing values to both birth and year of death. Here the description consists of all the remaining text included in the vector `a` (positions 2 to n, which we paste together).
 ```
           a <- unlist(strsplit(personalichkeiten[j],","))
           name <- a[1]
@@ -274,7 +274,7 @@ Alternative B (test == FALSE) : same as before but there is no number to extract
           todesjahr <- NA
           beschreibung <- paste(a[2:length(a)], collapse =" ")
 ```
-Regardless of the alternative, we now want to create the row we are going to add to the `personalities` data.frame. We extract the name of the municipality from the original `swissdata` dataframe (from row `i`), the canton and the BFS Id. We generate the data.frame on the basis of all the generated objects. Finally, we bind the generated data.frame (of a single row, that is `personalities_j`) to the personalities data.frame.
+Regardless of the alternative, we now want to create the row we are going to add to the `personalities` data.frame. We extract the name of the municipality from the original `swissdata` dataframe (from row `i`), the canton and the BFS Id. We generate the dataframe based on all the generated objects. Finally, we bind the generated dataframe (of a single row, that is `personalities_j`) to the personalities dataframe.
 ```
         gemeinde <- swissdata$`Offizieller Gemeindename`[i]
         kanton <- swissdata$Kanton[i]
@@ -282,15 +282,15 @@ Regardless of the alternative, we now want to create the row we are going to add
         personalities_j <- data.frame(name,geburtsjahr,todesjahr,beschreibung,gemeinde,bfs_nr,kanton)
         personalities <- rbind(personalities,personalities_j)
 ```
-Let us remove the objects `check` and `check2` to ensure they do not exist before the next iteration.
+Let us remove the objects `check` and `check2` to ensure they do not exist before the next iteration (allowing to avoid some potential errors).
 ```
 rm(check,check2)
 ```
-The two last lines of the code are not absolutely necessary for the code to work properly but they are still important. First, the command `Sys.sleep` pauses R for n seconds (random time between 5 and 10 seconds). This aims at reducing the number of requests made to the server. This is a good practice in general and also limits the risk of having its IP address being banned. Finally, the command `print()` literally prints the desired message at each iteration. In this case, it gives us an idea of which amount of data was already retrieved (and for which municipalities).
+The two last lines of the code are not absolutely necessary for the code to work properly, but they are still important. First, the command `Sys.sleep` pauses R for n seconds (a random time between 5 and 10 seconds). This aims to reduce the number of requests made to the server in a short amount of time. This is a good practice in general and also limits the risk of having your IP address being banned from a website. Finally, the command `print()` literally prints the desired message at each iteration. In this case, it gives us an idea of which iteration is currently being processed.
 ```
 Sys.sleep(runif(1, 5, 10))
 print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
 ```
 
 
-> To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
+> To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also means that there are several code variants that can achieve the same results.
