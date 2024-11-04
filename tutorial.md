@@ -273,7 +273,7 @@ Alternative B (test = FALSE) : same as before but there is no number to extract,
           todesjahr <- NA
           beschreibung <- paste(a[2:length(a)], collapse =" ")
 ```
-Whatever the alternative , we wheter test true or not
+Whatever the alternative, we now want to create the row we are going to add to the `personalities` data.frame. We extract the name of the municipality from the original `swissdata` dataframe (from row `i`), the canton and the BFS Id. We generate the data.frame on the basis of all the generated objects. Finally, we bind the generated data.frame (of a single row, that is `personalities_j`) to the personalities data.frame.
 ```
         gemeinde <- swissdata$`Offizieller Gemeindename`[i]
         kanton <- swissdata$Kanton[i]
@@ -281,21 +281,16 @@ Whatever the alternative , we wheter test true or not
         personalities_j <- data.frame(name,geburtsjahr,todesjahr,beschreibung,gemeinde,bfs_nr,kanton)
         personalities <- rbind(personalities,personalities_j)
 ```
-
-remove
+Let us remove the objects `check` and `check2` to ensure they do not exist before the next iteration.
 ```
 rm(check,check2)
 ```
-
-important
+The two last lines of the code are not absolutely necessary for the code to work properly but they are still important.
 ```
 Sys.sleep(runif(1, 5, 10))
-```
-
-useful but not absolutely necessary
-```
 print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' webpage : ", round( (i / length(swissdata$Kanton))*100,2)," % done",sep=""))
 ```
+
 
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also mean that there are several code variants that can achieve the same results.
