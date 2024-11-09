@@ -297,6 +297,6 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 
 ```
 User-agent: * 
-Disallow: 
+Disallow: /
 ```
 
