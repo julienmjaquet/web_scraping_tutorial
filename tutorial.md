@@ -294,3 +294,9 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also means that there are several code variants that can achieve the same results.
+
+```
+User-agent: * 
+Disallow: 
+```
+
