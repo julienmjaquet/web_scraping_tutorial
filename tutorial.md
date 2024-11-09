@@ -25,9 +25,10 @@ Define the webpage we are going to retrieve and read the page.
 link <- "https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden"
 webpage <- read_html(link)
 ``` 
-Extract the table (by specifying the character used as a decimal place marker).
+Identify the correct nodes and extract the tables by specifying the character used as a decimal place marker.
 ``` 
 table <- webpage %>%
+  html_nodes("table.wikitable") %>%
   html_table(dec=",")
 ```
 The newly created object `table` is a list containing the data frame (tibble). We will extract the first (and only) object of the list.
