@@ -22,6 +22,7 @@ link <- "https://de.wikipedia.org/wiki/Liste_Schweizer_Gemeinden"
 webpage <- read_html(link)
 
 table <- webpage %>%
+  html_nodes("table.wikitable") %>%
   html_table(dec=",")
 
 swissdata <- table[[1]]
@@ -68,7 +69,7 @@ for (i in 1:nrow(swissdata)){
   personalichkeiten <- webpage %>%
     html_elements("h2,ul") %>%
     html_text2()
-  check <- which(personalichkeiten=="Persönlichkeiten"|personalichkeiten=="Söhne und Töchter")
+  check <- which(personalichkeiten=="PersÃ¶nlichkeiten"|personalichkeiten=="SÃ¶hne und TÃ¶chter")
   
   
   if (length(check) == 1){
