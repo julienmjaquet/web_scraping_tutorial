@@ -296,21 +296,4 @@ print(paste("Retrieved data from '",swissdata$`Offizieller Gemeindename`[i],"' w
 
 > To conclude, it worth remembering that the process of scraping data from the web is often achieved by trial and error. This also means that there are several code variants that can achieve the same results.
 
-```
-legit <- foreign::read.spss("./2408_SRG_Legitimität_W1-W11_inkl_Stammdaten.sav",to.data.frame =TRUE)
-
-freq_semaine <- c("(Fast) täglich (7)","Mehrmals pro Woche (6)","Ungefähr 1 x pro Woche (5)")
-
-empreinte_totale <- legit %>%
-  group_by(welle,sprachregion) %>%
-  summarize(empreinte_var1 = weighted.mean(F9_1 %in% freq_semaine | F9_2 %in% freq_semaine |
-                                           F9_3 %in% freq_semaine | F9_4 %in% freq_semaine |
-                                           F9_5 %in% freq_semaine, w=weight_lang),
-            empreinte_var2 = weighted.mean(F9_2 %in% freq_semaine | F9_3 %in% freq_semaine |
-                                           F9_4 %in% freq_semaine | F9_5 %in% freq_semaine, w=weight_lang),
-            empreinte_var3 = weighted.mean(F9_1 %in% freq_semaine, w=weight_lang))
-```
-
-
-
 
