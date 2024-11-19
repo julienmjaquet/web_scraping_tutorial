@@ -303,9 +303,11 @@ freq_semaine <- c("(Fast) täglich (7)","Mehrmals pro Woche (6)","Ungefähr 1 x 
 
 empreinte_totale <- legit %>%
   group_by(welle,sprachregion) %>%
-  summarize(empreinte_ADI = weighted.mean(F9_1 %in% freq_semaine | F9_2 %in% freq_semaine | F9_3 %in% freq_semaine | F9_4 %in% freq_semaine | F9_5 %in% freq_semaine,w=weight_lang),
-            empreinte_RTS = weighted.mean(F9_2 %in% freq_semaine | F9_3 %in% freq_semaine | F9_4 %in% freq_semaine | F9_5 %in% freq_semaine,w=weight_lang),
-            empreinte_simple = weighted.mean(F9_1 %in% freq_semaine,w=weight_lang))
+  summarize(empreinte_var1 = weighted.mean(F9_1 %in% freq_semaine | F9_2 %in% freq_semaine |
+                                          F9_3 %in% freq_semaine | F9_4 %in% freq_semaine | F9_5 %in% freq_semaine,w=weight_lang),
+            empreinte_var2 = weighted.mean(F9_2 %in% freq_semaine | F9_3 %in% freq_semaine | F9_4 %in% freq_semaine |
+                                          F9_5 %in% freq_semaine,w=weight_lang),
+            empreinte_var3 = weighted.mean(F9_1 %in% freq_semaine,w=weight_lang))
 ```
 
 
